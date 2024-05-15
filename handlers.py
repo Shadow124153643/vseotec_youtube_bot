@@ -80,7 +80,7 @@ async def handle_subscribed_callback(callback_query: CallbackQuery, state: FSMCo
         parse_mode=ParseMode.HTML,
         reply_markup=get_callback_btns(btns={
         '▶️Смотреть видео': 'https://www.youtube.com/watch?v=2Kuzip-zukY' }))
-        await asyncio.sleep(6)#180
+        await asyncio.sleep(190)
         await callback_query.message.answer(
             f'✅Как и обещал, вот <b>ПОШАГОВАЯ</b> инструкция <b>«Как выйти на доход в 1.000$ с помощью Американского Ютуба за 2 недели🤯»</b>\n\n'
             f'👌В этой инструкции, которую можно прочитать <b>за 5 минут</b>, ты получишь конкретный план действий, и сможешь <b>УЖЕ СЕГОДНЯ</b>, сделать свой первый шаг на Американском Ютубе!\n\n'
@@ -89,7 +89,7 @@ async def handle_subscribed_callback(callback_query: CallbackQuery, state: FSMCo
         parse_mode=ParseMode.HTML,
         reply_markup=get_callback_btns(btns={
         'Читать инструкцию🔥': 'https://telegra.ph/POSHAGOVAYA-instrukciya-kak-nachat-zarabatyvat-ot-500-na-Amerikanskom-YouTube-v-pervyj-mesyac-05-05-3'}))
-        await asyncio.sleep(12)#380
+        await asyncio.sleep(397)
         await callback_query.message.answer(
             f'<b>Тебе мало инструкции и ты хочешь еще больше топовой информации о Американском ютубе?</b>\n\n'
             f'<b>Хм</b>…хочешь попасть на ЛЕГЕНДАРНОЕ наставничество лично со мной, на котором мои ученики добиваются максимальных результатов за кратчайшие сроки?\n\n'
@@ -112,7 +112,7 @@ async def handle_no_callback(callback_query: CallbackQuery, state: FSMContext):
         f'В этом видео я рассказал, что мне помогло побороть свой страх и сделать первый шаг👇\n\n'
         f'https://www.youtube.com/watch?v=Y8AM9h6f7XE',
         parse_mode=ParseMode.HTML)
-    await asyncio.sleep(6)#120
+    await asyncio.sleep(120)
     await callback_query.answer()
     await callback_query.message.answer(
         f'😌<b>Скажи честно, узнал себя в этом видео?</b>\n\n'
