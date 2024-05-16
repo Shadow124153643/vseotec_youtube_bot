@@ -136,6 +136,7 @@ async def handle_no_callback(callback_query: CallbackQuery, state: FSMContext):
         parse_mode=ParseMode.HTML,
         reply_markup=get_callback_btns(btns={
         '✅Заполнить анкету':'https://docs.google.com/forms/d/e/1FAIpQLSdgb4a_ACp0k5TGe5__r1HV3XloF6NFE579jfdM12LnMZm8tw/viewform?usp=sf_link'}))
+    await state.clear()
     
 @router.callback_query(Reg.subscribed, F.data.startswith('yes_'))
 async def handle_yes_callback(callback_query: CallbackQuery, state: FSMContext):
@@ -150,4 +151,5 @@ async def handle_yes_callback(callback_query: CallbackQuery, state: FSMContext):
         parse_mode=ParseMode.HTML,
         reply_markup=get_callback_btns(btns={
         '✅Заполнить анкету':'https://docs.google.com/forms/d/e/1FAIpQLSdgb4a_ACp0k5TGe5__r1HV3XloF6NFE579jfdM12LnMZm8tw/viewform?usp=sf_link'}))
+    await state.clear()
     
