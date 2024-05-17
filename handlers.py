@@ -34,7 +34,7 @@ async def start_cmd(message: types.Message, state: FSMContext):
         f'❌И кстати, в отличии от "<b>российского</b>" Ютуба, на <b>Американском</b> Ютубе <b>НЕ</b> нужно снимать себя на камеру, записывать свой голос, придумывать часами какой-то сложный сценарий к видео и заниматься подобной фигней!\n\n'
         f'✅Именно благодаря этим плюсам, я, моя команда и мои ученики - выбрали Американский Ютуб и активно в нем развиваемся!\n\n'
         f'🔥Если тебе интересен Американский Ютуб и ты хочешь начать в нём развиваться и зарабатывать\n\n'
-        f'🎁Смело нажимай на кнопку ниже и и получай мой первый подарок для тебя👇\n\n',
+        f'🎁Смело нажимай на кнопку ниже и получай мой первый подарок для тебя👇\n\n',
     parse_mode=ParseMode.HTML,
     reply_markup=get_callback_btns(btns={
     f'🎁Получить подарок': 'receive_{gift}'}))
@@ -67,14 +67,14 @@ async def handle_start_subscription_callback(callback_query: CallbackQuery):
 
 @router.callback_query(Reg.subscription, F.data.startswith('subscribed_'))
 async def handle_subscribed_callback(callback_query: CallbackQuery, state: FSMContext):
-    result = await bot.get_chat_member(chat_id='-1001967695255', user_id=callback_query.from_user.id)
+    result = await bot.get_chat_member(chat_id='-1002043963397', user_id=callback_query.from_user.id)
     if result.status == 'creator' or result.status == 'administrator' or result.status =='member': 
         await state.update_data(callback_query='subscribed_')
         await state.set_state(Reg.subscribed)
         await callback_query.answer()
         await callback_query.message.answer(
             f'<b>🙏Спасибо за подписку!</b>\n\n'
-            f'🎁А теперь лови https://www.youtube.com/watch?v=2Kuzip-zukY где ты узнаешь, как получить мой подарок, а также ещё больше погрузишься в мир американского YouTube.\n\n'
+            f'🎁А теперь лови <a href="https://www.youtube.com/watch?v=2Kuzip-zukY">ссылку на видео</a> где ты узнаешь, как получить мой подарок, а также ещё больше погрузишься в мир американского YouTube.\n\n'
             f'Длительность <b>всего минута</b>. Нажимай на кнопку и слушай видео <b>внимательно</b>👇\n\n',
             disable_web_page_preview=True,
         parse_mode=ParseMode.HTML,
