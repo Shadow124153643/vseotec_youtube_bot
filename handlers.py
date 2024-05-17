@@ -49,7 +49,7 @@ async def handle_callback(callback_query: CallbackQuery, state: FSMContext):
         f'Перед тем как забрать подарок, подпишись на мой https://t.me/vlad_vseotec 👈\n\n'
         f'Там я постоянно провожу созвоны с подписчиками, отвечаю на их вопросы, помогаю и рассказываю еще больше <b>РЕАЛЬНО</b> годной инфы про Америкаский ютуб!\n\n'
         f'Подписывайся, а потом жми на кнопку снизу👇\n\n'
-        f'https://t.me/vlad_vseotec \n\n',
+        f'<a href="https://https://t.me/vlad_vseotec"></a> \n\n',
         #disable_web_page_preview=True,
     parse_mode=ParseMode.HTML,
     reply_markup=get_callback_btns(btns={
@@ -101,7 +101,7 @@ async def handle_subscribed_callback(callback_query: CallbackQuery, state: FSMCo
         await handle_start_subscription_callback(callback_query)
 
 @router.callback_query(Reg.subscribed, F.data.startswith('no_'))
-async def handle_no_callback(callback_query: CallbackQuery, state: FSMContext):
+async def handle_no_callback(callback_query: types.CallbackQuery, state: FSMContext):
     await state.update_data(callback_query='no_')
     await state.set_state(Reg.answer_no)
     await callback_query.answer()
@@ -111,7 +111,8 @@ async def handle_no_callback(callback_query: CallbackQuery, state: FSMContext):
         f'❗️Но произошел один важный момент в моей жизни, после которого я поборол свой страх и просто начал действовать\n\n'
         f'В этом видео я рассказал, что мне помогло побороть свой страх и сделать первый шаг👇\n\n'
         f'https://www.youtube.com/watch?v=Y8AM9h6f7XE \n\n',
-        parse_mode=ParseMode.HTML)
+        parse_mode=ParseMode.HTML
+    )
     await asyncio.sleep(120)
     await callback_query.message.answer(
         f'😌<b>Скажи честно, узнал себя в этом видео?</b>\n\n'
@@ -120,22 +121,29 @@ async def handle_no_callback(callback_query: CallbackQuery, state: FSMContext):
         f'💪<b>Ты готов пройти этот путь вместе со мной?</b>\n'
         f'Забить на все страхи и сомнения, и просто сделать инвестицию в себя, в своё будущее\n\n',
         parse_mode=ParseMode.HTML,
-        reply_markup=get_callback_btns(btns={
-        '🔥Да, я готов': 'yesready_{ready}'}))
-    
-@router.callback_query(Reg.answer_no, F.data.startswith('yesready_'))
-async def handle_no_callback(callback_query: CallbackQuery, state: FSMContext):
+        reply_markup=get_callback_btns(btns={'🔥Да, я готов': 'yesready'})
+    )
+
+    await asyncio.sleep(300)
+    if await state.get_state() == Reg.answer_no.state:
+        await handle_yesready_automatic(callback_query, state)
+
+@router.callback_query(Reg.answer_no, F.data.startswith('yesready'))
+async def handle_yesready_callback(callback_query: types.CallbackQuery, state: FSMContext):
+    await callback_query.answer()
+    await handle_yesready_automatic(callback_query, state)
+
+async def handle_yesready_automatic(callback_query: types.CallbackQuery, state: FSMContext):
     await state.update_data(callback_query='yesready_')
     await state.set_state(Reg.Form)
-    await callback_query.answer()
     await callback_query.message.answer(
         f'✅<b>Ты сделал правильный выбор, за который скажешь себе «спасибо»</b>\n\n'
         f'👌Заполни анкету пред. записи и получи личный созвон со мной!\n\n'
         f'🔥На созвоне мы разберем конкретно твою ситуацию, а также я расскажу о фишках на Американском ютубе, которые взорвут твой мозг!\n\n'
         f'<b>Заполняй анкету и я с тобой свяжусь</b>👇\n\n',
         parse_mode=ParseMode.HTML,
-        reply_markup=get_callback_btns(btns={
-        '✅Заполнить анкету':'https://docs.google.com/forms/d/e/1FAIpQLSdgb4a_ACp0k5TGe5__r1HV3XloF6NFE579jfdM12LnMZm8tw/viewform?usp=sf_link'}))
+        reply_markup=get_callback_btns(btns={'✅Заполнить анкету': 'https://docs.google.com/forms/d/e/1FAIpQLSdgb4a_ACp0k5TGe5__r1HV3XloF6NFE579jfdM12LnMZm8tw/viewform?usp=sf_link'})
+    )
     await state.clear()
     
 @router.callback_query(Reg.subscribed, F.data.startswith('yes_'))
