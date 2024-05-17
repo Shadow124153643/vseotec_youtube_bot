@@ -67,7 +67,7 @@ async def handle_start_subscription_callback(callback_query: CallbackQuery):
 
 @router.callback_query(Reg.subscription, F.data.startswith('subscribed_'))
 async def handle_subscribed_callback(callback_query: CallbackQuery, state: FSMContext):
-    result = await bot.get_chat_member(chat_id='-1002043963397', user_id=callback_query.from_user.id)
+    result = await bot.get_chat_member(chat_id='-1001967695255', user_id=callback_query.from_user.id)
     if result.status == 'creator' or result.status == 'administrator' or result.status =='member': 
         await state.update_data(callback_query='subscribed_')
         await state.set_state(Reg.subscribed)
