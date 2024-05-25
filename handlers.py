@@ -110,10 +110,10 @@ async def handle_no_callback(callback_query: types.CallbackQuery, state: FSMCont
         f'🙏В начале своего пути, я также как и ты боялся и избегал Американского ютуба\n\n'
         f'❗️Но произошел один важный момент в моей жизни, после которого я поборол свой страх и просто начал действовать\n\n'
         f'В этом видео я рассказал, что мне помогло побороть свой страх и сделать первый шаг👇\n\n'
-        f'https://www.youtube.com/watch?v=Y8AM9h6f7XE \n\n',
+        f'https://www.youtube.com/watch?v=iIQ3UI3IrdE \n\n',
         parse_mode=ParseMode.HTML
     )
-    await asyncio.sleep(120)
+    await asyncio.sleep(505)
     await callback_query.message.answer(
         f'😌<b>Скажи честно, узнал себя в этом видео?</b>\n\n'
         f'☝️Да, именно после осознания этих вещей я принял для себя забить на всё и просто погрузиться в Американский ютуб с головой!\n\n'
@@ -124,7 +124,7 @@ async def handle_no_callback(callback_query: types.CallbackQuery, state: FSMCont
         reply_markup=get_callback_btns(btns={'🔥Да, я готов': 'yesready'})
     )
 
-    await asyncio.sleep(300)
+    await asyncio.sleep(60)
     if await state.get_state() == Reg.answer_no.state:
         await handle_yesready_automatic(callback_query, state)
 
